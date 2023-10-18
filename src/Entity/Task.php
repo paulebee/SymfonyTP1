@@ -21,11 +21,14 @@ class Task
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $dueAt = null;
+    private ?\DateTime $dueAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $Location = null;
+
+    #[ORM\Column]
+    private ?bool $isCompleted = null;
 
     public function getId(): ?int
     {
@@ -56,12 +59,12 @@ class Task
         return $this;
     }
 
-    public function getDueAt(): ?\DateTimeImmutable
+    public function getDueAt(): ?\DateTime
     {
         return $this->dueAt;
     }
 
-    public function setDueAt(?\DateTimeImmutable $dueAt): static
+    public function setDueAt(?\DateTime $dueAt): static
     {
         $this->dueAt = $dueAt;
 
@@ -76,6 +79,18 @@ class Task
     public function setLocation(?Room $Location): static
     {
         $this->Location = $Location;
+
+        return $this;
+    }
+
+    public function isIsCompleted(): ?bool
+    {
+        return $this->isCompleted;
+    }
+
+    public function setIsCompleted(bool $isCompleted): static
+    {
+        $this->isCompleted = $isCompleted;
 
         return $this;
     }

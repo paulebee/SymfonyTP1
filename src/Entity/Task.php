@@ -23,6 +23,10 @@ class Task
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $dueAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Room $Location = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Task
     public function setDueAt(?\DateTimeImmutable $dueAt): static
     {
         $this->dueAt = $dueAt;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Room
+    {
+        return $this->Location;
+    }
+
+    public function setLocation(?Room $Location): static
+    {
+        $this->Location = $Location;
 
         return $this;
     }

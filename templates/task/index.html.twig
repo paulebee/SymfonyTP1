@@ -32,7 +32,9 @@
                 <td>{{ task.isCompleted }}</td>
                 <td>
                     <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
+                    {% endif %}
                 </td>
                 
             </tr>
@@ -44,5 +46,7 @@
         </tbody>
     </table>
 
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_task_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

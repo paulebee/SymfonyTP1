@@ -2,6 +2,10 @@
 
 {% block title %}Task index{% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block body %}
     <h1>Task index</h1>
 
@@ -9,7 +13,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th >Name</th>
                 <th>Description</th>
                 <th>Location</th>
                 <th>DueAt</th>

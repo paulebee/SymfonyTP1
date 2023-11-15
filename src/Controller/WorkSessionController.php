@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+
 use App\Entity\WorkSession;
 use App\Form\WorkSessionType;
-use App\Repository\WorkSessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\WorkSessionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/workSession')]
 class WorkSessionController extends AbstractController
@@ -26,19 +27,26 @@ class WorkSessionController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $workSession = new WorkSession();
-        $form = $this->createForm(WorkSessionType::class, $workSession);
-        $form->handleRequest($request);
+        // $form = $this->createForm(WorkSessionType::class, $workSession);
+        // $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($workSession);
-            $entityManager->flush();
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $entityManager->persist($workSession);
+        //     $entityManager->flush();
 
-            return $this->redirectToRoute('app_work_session_index', [], Response::HTTP_SEE_OTHER);
-        }
+        //     return $this->redirectToRoute('app_work_session_index', [], Response::HTTP_SEE_OTHER);
+        // }
+        $workSession->setstartedAt(new \DateTimeImmutable());
+
+        $entityManager->persist($workSession);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_task_index', [], Response::HTTP_SEE_OTHER);
+        
 
         return $this->render('work_session/new.html.twig', [
             'work_session' => $workSession,
-            'form' => $form,
+            // 'form' => $form,
         ]);
     }
 

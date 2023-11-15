@@ -20,9 +20,6 @@ class Task
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTime $dueAt = null;
-
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $Location = null;
@@ -55,18 +52,6 @@ class Task
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDueAt(): ?\DateTime
-    {
-        return $this->dueAt;
-    }
-
-    public function setDueAt(?\DateTime $dueAt): static
-    {
-        $this->dueAt = $dueAt;
 
         return $this;
     }

@@ -45,7 +45,10 @@ security:
         - { path: ^/task/./edit, roles: ROLE_ADMIN }
         - { path: ^/register/., roles: ROLE_ADMIN }
         - { path: ^/users, roles: ROLE_ADMIN }
-        - { path: ^/task, roles: ROLE_USER }
+        # - { path: ^/task, roles: ROLE_USER }
+        - { path: ^/workSession/new, roles: ROLE_USER }
+        - { path: ^/workSession/edit, roles: ROLE_USER }
+        - { path: ^/workSession, roles: ROLE_ADMIN }
 
 when@test:
     security:

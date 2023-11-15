@@ -16,7 +16,6 @@
                 <th >Name</th>
                 <th>Description</th>
                 <th>Location</th>
-                <th>DueAt</th>
                 <th>isCompleted</th>
                 <th>actions</th>
             </tr>
@@ -28,7 +27,6 @@
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
                 <td>{{ task.location }}</td>
-                <td>{{ task.dueAt ? task.dueAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.isCompleted }}</td>
                 <td>
                     <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>

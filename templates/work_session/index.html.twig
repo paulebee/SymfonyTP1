@@ -19,9 +19,13 @@
         {% for work_session in work_sessions %}
             <tr>
                 <td>{{ work_session.id }}</td>
-                <td>{{ work_session.Date ? work_session.Date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ work_session.startedAt ? work_session.startedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ work_session.finishedAt ? work_session.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ work_session.startedAt ? work_session.startedAt|date('d-m-Y') : '' }}</td>
+                <td>{{ work_session.startedAt ? work_session.startedAt|date('H:i:s') : '' }}</td>
+                {% if work_session.finishedAt == null %}
+                    <td>En cours</td>
+                    {% else %}
+                    <td>{{ work_session.finishedAt ? work_session.finishedAt|date('H:i:s') : '' }}</td>
+                {% endif %}
                 <td>
                     <a href="{{ path('app_work_session_show', {'id': work_session.id}) }}">show</a>
                     <a href="{{ path('app_work_session_edit', {'id': work_session.id}) }}">edit</a>

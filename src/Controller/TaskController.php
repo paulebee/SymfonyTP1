@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Form\TaskTypeCheck;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,11 +15,24 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/task')]
 class TaskController extends AbstractController
 {
-    #[Route('/', name: 'app_task_index', methods: ['GET'])]
-    public function index(TaskRepository $taskRepository): Response
-    {
+    #[Route('/', name: 'app_task_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, EntityManagerInterface $entityManager, TaskRepository $taskRepository): Response
+    {   
+        $tasks = $taskRepository->findAll();
+        
+        // if ($request->isMethod('POST')) {
+            
+            foreach ($tasks as $task) {
+                $isCompleted = $request->request->get('isCompleted' . $task->getId(), false);
+                $task->setIsCompleted($isCompleted);
+
+                $entityManager->persist($task);
+            
+            }
+            $entityManager->flush();
+        // }
         return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $tasks,
         ]);
     }
 
@@ -55,7 +69,6 @@ class TaskController extends AbstractController
     {
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 

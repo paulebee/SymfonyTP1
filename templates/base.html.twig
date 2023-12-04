@@ -11,10 +11,21 @@
         {% endblock %}
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     </head>
-    <body>
+    <body class="m-5">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <p>Vous êtes connecté en temps que {{app.user.email}}</p>
-            <a href="{{path('app_logout')}}"> Déconnexion </a>
+            <p class="mb-2">Vous êtes connecté en temps que <span class="font-medium">{{app.user.email}}</span>
+            {% if is_granted('ROLE_ADMIN') %}[ADMIN]{% endif %}
+            </p>
+
+            <div class="mb-3">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{path('app_task_index')}}" class="mx-2 underline"> Tâches </a>
+                    <a href="{{path('app_work_session_index')}}" class="mx-2 underline"> Sessions de travail </a>
+                    <a href="{{path('app_users_index')}}" class="mx-2 underline"> Utilisateurs </a>
+                {% endif %}
+
+                <a href="{{path('app_logout')}}" class="font-medium"> Déconnexion </a>
+            </div>
         {% endif %}
         {% block body %}{% endblock %}
     </body>

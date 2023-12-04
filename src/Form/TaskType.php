@@ -15,7 +15,6 @@ class TaskType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('dueAt', DateTimeType::class, [ 'widget' => 'single_text'])
             ->add('Location')
             ->add('isCompleted')
         ;   

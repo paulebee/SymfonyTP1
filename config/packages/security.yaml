@@ -42,7 +42,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/room, roles: ROLE_ADMIN }
-        - { path: ^/task/./edit, roles: ROLE_ADMIN }
         - { path: ^/register/., roles: ROLE_ADMIN }
         - { path: ^/users, roles: ROLE_ADMIN }
         # - { path: ^/task, roles: ROLE_USER }

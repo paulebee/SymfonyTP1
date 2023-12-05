@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
         {% endblock %}
 
         {% block javascripts %}
@@ -12,21 +13,22 @@
         <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     </head>
     <body class="m-5">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <p class="mb-2">Vous êtes connecté en temps que <span class="font-medium">{{app.user.email}}</span>
-            {% if is_granted('ROLE_ADMIN') %}[ADMIN]{% endif %}
-            </p>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p class="mb-2">Vous êtes connecté en temps que <span class="font-medium">{{app.user.email}}</span>
+                {% if is_granted('ROLE_ADMIN') %}[ADMIN]{% endif %}
+                </p>
 
-            <div class="mb-3">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{path('app_task_index')}}" class="mx-2 underline"> Tâches </a>
-                    <a href="{{path('app_work_session_index')}}" class="mx-2 underline"> Sessions de travail </a>
-                    <a href="{{path('app_users_index')}}" class="mx-2 underline"> Utilisateurs </a>
-                {% endif %}
+                <div class="mb-3">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{path('app_task_index')}}" class="mx-2 underline"> Tâches </a>
+                        <a href="{{path('app_work_session_index')}}" class="mx-2 underline"> Sessions de travail </a>
+                        <a href="{{path('app_users_index')}}" class="mx-2 underline"> Utilisateurs </a>
+                        <a href="{{path('app_room_index')}}" class="mx-2 underline"> Maison </a>
+                    {% endif %}
 
-                <a href="{{path('app_logout')}}" class="font-medium"> Déconnexion </a>
-            </div>
-        {% endif %}
+                    <a href="{{path('app_logout')}}" class="mx-2 font-medium"> Déconnexion </a>
+                </div>
+            {% endif %}
         {% block body %}{% endblock %}
     </body>
 </html>

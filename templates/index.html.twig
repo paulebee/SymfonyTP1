@@ -5,5 +5,7 @@
 {% block body %}
     <h1 class="text-2xl mb-2">HouseApp</h1>
 
-    <a href="{{ path('app_work_session_new') }}" class="underline">Démarrer session</a>
+    {% if not is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_work_session_new') }}" class="underline">Démarrer session</a>
+    {% endif %}
 {% endblock %}

@@ -3,32 +3,29 @@
 {% block title %}WorkSession index{% endblock %}
 
 {% block body %}
-    <h1>WorkSession index</h1>
+    <h1 class="text-2xl text-center mt-10">WorkSession index</h1>
 
-    <table class="table">
-        <thead>
+    <table class="table w-3/4 text-sm text-left text-gray-500 dark:text-gray-400 mt-4 mx-auto">
+        <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>StartedAt</th>
-                <th>FinishedAt</th>
-                <th>actions</th>
+                <th class="px-6 py-3">Id</th>
+                <th class="px-6 py-3">StartedAt</th>
+                <th class="px-6 py-3">FinishedAt</th>
+                <th class="px-6 py-3">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for work_session in work_sessions %}
-            <tr>
-                <td>{{ work_session.id }}</td>
-                <td>{{ work_session.startedAt ? work_session.startedAt|date('d-m-Y') : '' }}</td>
-                <td>{{ work_session.startedAt ? work_session.startedAt|date('H:i:s') : '' }}</td>
+            <tr class="bg-white border-b dark:bg-white-900 dark:border-gray-700 text-black">
+                <td class="px-6 py-4">{{ work_session.id }}</td>
+                <td class="px-6 py-4">{{ work_session.startedAt ? work_session.startedAt|date('d/m/Y H:i:s') : '' }}</td>
                 {% if work_session.finishedAt == null %}
-                    <td>En cours</td>
+                    <td class="px-6 py-4">En cours</td>
                     {% else %}
-                    <td>{{ work_session.finishedAt ? work_session.finishedAt|date('H:i:s') : '' }}</td>
+                    <td class="px-6 py-4">{{ work_session.finishedAt ? work_session.finishedAt|date('H:i:s') : '' }}</td>
                 {% endif %}
-                <td>
+                <td class="px-6 py-4 font-bold">
                     <a href="{{ path('app_work_session_show', {'id': work_session.id}) }}">show</a>
-                    <a href="{{ path('app_work_session_edit', {'id': work_session.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_work_session_new') }}">Create new</a>
 {% endblock %}

@@ -7,30 +7,31 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Users index</h1>
+    <h1 class="text-2xl text-center mt-10">Users index</h1>
 
-    <table class="table">
-        <thead>
+    <table class="table w-3/4 text-sm text-left text-gray-500 dark:text-gray-400 mt-4 mx-auto">
+        <thead class="text-l text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th>Id</th>
-                <th >Email</th>
-                <th>Roles</th>
-                <th>Is verified</th>
+                <th class="px-6 py-3">Id</th>
+                <th class="px-6 py-3" >Email</th>
+                <th class="px-6 py-3">Roles</th>
+                <th class="px-6 py-3">Is verified</th>
+                <th class="px-6 py-3">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles|join(', ') }}</td>
-                <td>{{ user.isVerified ? 'Yes':'No' }}</td>
-                <td>
+            <tr class="bg-white border-b dark:bg-white-900 dark:border-gray-700 text-black">
+                <td  class="px-6 py-4">{{ user.id }}</td>
+                <td  class="px-6 py-4">{{ user.email }}</td>
+                <td  class="px-6 py-4">{{ user.roles|join(', ') }}</td>
+                <td  class="px-6 py-4">{{ user.isVerified ? 'Yes':'No' }}</td>
+                <td  class="px-6 py-4 font-bold">
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
                 </td>
             </tr>
         {% else %}
-            <tr>
+            <tr  class="px-6 py-4">
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
@@ -38,7 +39,9 @@
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{path('app_register_admin')}}" class="underline mt-2"> Créer ADMIN </a>
+    <div class="flex justify-center mt-5 font-bold">
+        <a href="{{path('app_register_admin')}}"> Créer ADMIN </a>
+    </div>
     {% endif %}
     
 {% endblock %}

@@ -12,7 +12,6 @@ class WorkSessionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Date')
             ->add('startedAt')
             ->add('finishedAt')
         ;
